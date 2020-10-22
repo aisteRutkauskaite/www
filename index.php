@@ -1,29 +1,29 @@
 <?php
-define('G', 0);
-define('Y', 1);
-define('R', 2);
-
-$square_color = [
-    [G, G, G, G, G, G, G, G],
-    [G, Y, Y, Y, Y, Y, Y, G],
-    [G, Y, R, R, R, R, Y, G],
-    [G, Y, R, Y, Y, R, Y, G],
-    [G, Y, R, Y, Y, R, Y, G],
-    [G, Y, R, R, R, R, Y, G],
-    [G, Y, Y, Y, Y, Y, Y, G],
-    [G, G, G, G, G, G, G, G]
+$my_memories = [
+    'Baras',
+    'Draugai',
+    'Kokteiliai',
+    'Šokiai',
+    'Šokiai',
+    'Alus',
+    'Linskmybes'
 ];
 
-var_dump($square_color );
+var_dump($my_memories);
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title> kazkas </title>
-
 </head>
 <body>
-
+<h1>Kas buvo penktadienį?</h1>
+<h2>Mano prisiminimai:</h2>
+<ul>
+    <?php foreach ($my_memories as $memory) : ?>
+        <li><?php print $memory; ?> </li>
+    <?php endforeach; ?>
+</ul>
 </body>
 </html>
