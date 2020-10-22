@@ -1,56 +1,33 @@
 <?php
-$my_memories = [
-    'Baras',
-    'Draugai',
-    'Kokteiliai',
-    'Šokiai',
-    'Maistas',
-    'Alus',
-    'Linskmybes'
-];
- $friend_memories = [
-    'Baras',
-    'Draugai',
-    'Kokteiliai',
-    'Šokiai',
-    'Nesamones',
-    'Toletas',
-    'Blogybes'
-];
-
-
-$flashback_index = rand(0, count($my_memories) - 1);
-$fb_text = $my_memories[$flashback_index];
-$h3 = "Flashback $fb_text : $flashback_index";
-$common_memories = [];
-foreach ($my_memories as $memory) {
-    if (in_array($memory, $friend_memories) && !in_array($memory, $common_memories)) {
-        $common_memories[] = $memory;
+$p = '';
+$random_length = rand(20, 40);
+$zodziai = [
+        'jonas',
+        'petras',
+        'ejo',
+        'bego',
+        'sauke',
+        'gere',
+        'namas',
+        'norfa',
+        'po',
+        'ant',
+    ];
+for ($i = 0; $i < $random_length; $i++) {
+        $random_word = rand(0, count($zodziai) - 1);
+        $p .= $zodziai[$random_word] . ' ';
     }
-}
-    var_dump($common_memories);
-
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> kazkas </title>
+    <title>Story Time</title>
 </head>
 <body>
-<h1>Kas buvo penktadienį?</h1>
-<h2>Mano prisiminimai:</h2>
-<ul>
-    <?php foreach ($my_memories as $memory) : ?>
-        <li><?php print $memory; ?> </li>
-    <?php endforeach; ?>
-</ul>
-<h3><?php print $h3; ?> </h3>
-<h3>Draugo prisiminimai:</h3>
-<ul>
-    <?php foreach ($friend_memories as $friend_memory) : ?>
-        <li><?php print $friend_memory; ?> </li>
-    <?php endforeach; ?>
-</ul>
+<h1>Lietuvių egzaminas</h1>
+<p>
+    <?php print $p; ?>
+</p>
 </body>
 </html>
