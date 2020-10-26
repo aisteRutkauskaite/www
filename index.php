@@ -17,16 +17,14 @@ $police_report = [
     ]
 ];
 
-foreach ($police_report as $index => $report) {
-    $police_report[$index]['warning_only'] = rand(0, 1) ? true : false;
-    if ($report['amount'] < 0) {
-        $police_report[$index]['css_class'] = 'expense';
-    } else {
-        $police_report[$index]['css_class'] = 'income';
-    }
+foreach ($police_report as $key => $report) {
+    $warning = rand(0, 1);
+    $police_report[$key]['warning_only'] = $warning ? true : false;
+    $police_report[$key]['css_class'] = $report['amount'] >= 0 ? 'income' : 'expense';
 }
-
 var_dump($police_report);
+
+
 ?>
 
 <!doctype html>
@@ -39,5 +37,16 @@ var_dump($police_report);
     <title>Bloopers</title>
 </head>
 <body>
+<h1>Policijos išrašas</h1>
+<ul>
+    <?php foreach ($police_report as $report): ?>
+        <li class="<?php print $report['css_class']; ?>">
+            <?php print $report['subject'] . ' (' . $report['reason'] . ') - '; ?>
+            <?php $report['warning_only'] ? print 'ispejimas' : print $report['amount']; ?>
+
+        </li>
+    <?php endforeach; ?>
+</ul>
+
 </body>
 </html>
