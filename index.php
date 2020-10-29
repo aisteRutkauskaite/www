@@ -1,42 +1,34 @@
 <?php
-$x = rand(0, 100);
-$y = rand(0, 100);
 
-function is_prime($number) {
-    if ($number === 1) {
-        return false;
-    }
-    for ($i = 2; $i <= $number / 2; $i++) {
-        if ($number % $i == 0) {
-            return false;
+function generate_matrix($size)
+{
+    $generated_array = [];
+    for ($i = 0; $i < $size; $i++) {
+        for ($j = 0; $j < $size; $j++) {
+            $generated_array[$i][$j] = rand(0, 1);
         }
     }
-    return true;
-}
-$answer_first = is_prime($x);
-$answer_second = is_prime($y);
-
-if ($answer_first) {
-    $text1 = "$x yra pirminis skaičius";
-} else {
-    $text1 = "$x nėra pirminis skaičius";
-}
-if ($answer_second) {
-    $text2 = "$y yra pirminis skaičius";
-} else {
-    $text2 = "$y nėra pirminis skaičius";
+    return $generated_array;
 }
 
-function sum_if_prime($x, $y) {
-    return $x + $y;
+$matrix = generate_matrix(rand(2, 4));
+//var_dump($matrix);
+
+function get_wining_rows($array)
+{
+    $generated_new_array = [];
+    foreach ($array as $index => $numbers) {
+        if (count(array_unique($numbers)) === 1) {
+            $generated_new_array[] = $index;
+        } else {
+            print 'Not';
+        }
+    }
+    return $generated_new_array;
 }
 
-if ($answer_first && $answer_second) {
-    $suma = sum_if_prime($x, $y);
-    $text3 = "Pirminių skaičių suma:$suma ";
-} else {
-    $text3 = "Abu skaičiai nėra pirminiai";
-}
+$wining_rows = get_wining_rows($matrix);
+var_dump($wining_rows);
 
 ?>
 
@@ -49,9 +41,48 @@ if ($answer_first && $answer_second) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Functions</title>
 </head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .yellow {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        margin: 10px;
+    }
+
+    .blue {
+        width: 100px;
+        height: 100px;
+        background-color: cornflowerblue;
+        margin: 10px;
+    }
+
+    .line {
+        border: 1px solid red;
+        width: fit-content;
+    }
+
+</style>
 <body>
-<h1><?php print $text1; ?></h1>
-<h1><?php print $text2; ?></h1>
-<h1><?php print $text3; ?></h1>
+<?php foreach ($matrix as $index => $row): ?>
+    <div class="container <?php print in_array($index, $wining_rows) ? 'line' : ''; ?>  ">
+        <?php foreach ($row as $col): ?>
+            <span class="<?php print $col ? 'blue' : 'yellow'; ?>"></span>
+        <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
 </body>
 </html>
