@@ -1,18 +1,29 @@
 <?php
-$street = [];
 
-for ($x = 0; $x < 5; $x++) {
-    $street[] = 'gražus namas su elektra';
+
+//Deklaruoti masyva pilna raidziu ['b', 'c', 'g'];
+//Deklaruoti funkcija count_values($array, $value),
+//kuri randa kiek kartu buvo rasta verte masyve ir
+//grąžina skaičių.
+/**
+ * @param array $array Raidžių masyvas.
+ * @param string $value Ieškoma raidė.
+ * @return int Rastų verčių skaičius.
+ */
+$letters = ['a', 'b', 'c', 'd', 'e', 'a', 'C', 'D', 'D', 'e'];
+
+function count_values($array, $value) {
+    $count = 0;
+    foreach ($array as $letter) {
+        if ($letter === $value) {
+            $count++;
+        }
+    }
+     return $count;
 }
-var_dump($street);
 
-foreach ($street as $key => $house) {
-    $street[$key] = &$house;
-}
 
-$street[2] = 'dingo elektra';
-var_dump($street);
-
+var_dump(count_values($letters, 'c'));
 ?>
 
 <!doctype html>
