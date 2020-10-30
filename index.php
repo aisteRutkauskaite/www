@@ -1,21 +1,23 @@
 <?php
-$hurdle_jump = [rand(1, 10), rand(1, 10), rand(1, 10), rand(1, 10), rand(1, 10),];
-$jump_height = rand(5, 12);
+
+$two_digit_number = rand(11, 99);
 
 
-function check_height($array, $number) {
-    foreach ($array as $jump) {
-        var_dump($number);
-        var_dump($array);
-        if ($jump  < $number) {
-            return true;
-        } else {
-            return false;
-        }
+function largest_swap($n) {
+    $num = (string)$n;
+    $reversed_number = strrev($num);
+    $number = (string)$reversed_number;
+    var_dump($n);
+    var_dump($reversed_number);
+
+    if ($number > $n) {
+        return true;
+    } else {
+        return false;
     }
 }
 
-var_dump(check_height($hurdle_jump, $jump_height));
+var_dump(largest_swap($two_digit_number));
 ?>
 
 <!doctype html>
