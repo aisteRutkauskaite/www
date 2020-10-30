@@ -1,29 +1,24 @@
 <?php
-
-
 //Deklaruoti masyva pilna raidziu ['b', 'c', 'g'];
-//Deklaruoti funkcija count_values($array, $value),
-//kuri randa kiek kartu buvo rasta verte masyve ir
-//grąžina skaičių.
+//Deklaruoti funkcija change_values, kuri gebėtų
+//pakeist turimo masyvo rastą(-as) vertę(-es) į nurodytą
 /**
  * @param array $array Raidžių masyvas.
- * @param string $value Ieškoma raidė.
- * @return int Rastų verčių skaičius.
+ * @param string $from Sena vertė.
+ * @param string $to Nauja vertė.
  */
 $letters = ['a', 'b', 'c', 'd', 'e', 'a', 'C', 'D', 'D', 'e'];
 
-function count_values($array, $value) {
-    $count = 0;
-    foreach ($array as $letter) {
-        if ($letter === $value) {
-            $count++;
+function change_values(&$array, $from, $to) {
+    foreach ($array as $key =>  &$letter) {
+        if ($letter === $from) {
+            $letter = $to;
         }
     }
-     return $count;
 }
 
-
-var_dump(count_values($letters, 'c'));
+change_values($letters, 'a', 'j');
+var_dump($letters);
 ?>
 
 <!doctype html>
