@@ -1,24 +1,17 @@
 <?php
-//Deklaruoti masyva pilna raidziu ['b', 'c', 'g'];
-//Deklaruoti funkcija change_values, kuri gebėtų
-//pakeist turimo masyvo rastą(-as) vertę(-es) į nurodytą
-/**
- * @param array $array Raidžių masyvas.
- * @param string $from Sena vertė.
- * @param string $to Nauja vertė.
- */
-$letters = ['a', 'b', 'c', 'd', 'e', 'a', 'C', 'D', 'D', 'e'];
+$atsakymas = '';
 
-function change_values(&$array, $from, $to) {
-    foreach ($array as $key =>  &$letter) {
-        if ($letter === $from) {
-            $letter = $to;
-        }
+if (isset($_POST['mygtukas'])) {
+    if ($_POST['mygtukas'] === 'kelti') {
+        $atsakymas = $_POST['number'] * $_POST['number'];
+    }
+
+    if ($_POST['mygtukas'] === 'dalinti') {
+        $atsakymas = $_POST['number'] / 2;
     }
 }
 
-change_values($letters, 'a', 'j');
-var_dump($letters);
+
 ?>
 
 <!doctype html>
@@ -31,6 +24,13 @@ var_dump($letters);
     <title>Functions</title>
 </head>
 <body>
+
+<form method="post">
+    <input type="number" placeholder="number" name="number">
+    <input type="submit" name="mygtukas" value="kelti">
+    <input type="submit" name="mygtukas" value="dalinti">
+</form>
+<h1><?php print $atsakymas; ?></h1>
 
 </body>
 </html>
