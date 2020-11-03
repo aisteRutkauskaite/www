@@ -1,25 +1,12 @@
 <?php
-$date = date('Y');
-$last_name = '';
-$years = '';
-$level = '';
-$name = '';
-$birth_years = '';
+$counter = 0;
 
-    if (isset($_POST['vardas'])) {
-        $name = $_POST['vardas'];
+
+
+    if (isset($_POST['count'])) {
+    $counter= (int)$_POST['count'] + 1 ;
     }
-    if (isset($_POST['pavarde'])) {
-        $last_name = $_POST["pavarde"];
-    }
-    if (isset($_POST['metai'])) {
-        $years = $_POST["metai"];
-        $birth_years = $date - (int)$years;
-    }
-    if (isset($_POST['lygis'])) {
-        $level = $_POST["lygis"];
-    }
-    $atsakymas = $name . ', gimęs (usi) ' . $birth_years . 'metais yra ' . $level . ' PHP programuotojas';
+
 
 ?>
 
@@ -33,40 +20,25 @@ $birth_years = '';
     <title>Functions</title>
 </head>
 <style>
-    img {
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button {
         width: 100px;
-        height: 100px;
     }
 </style>
 <body>
 <main>
-    <?php if (isset($_POST['pateikti'])): ?>
-        <div class='block'>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/P_yes_green.svg/1200px-P_yes_green.svg.png">
-            <div class="tekstas">
-                <h1>PHP ANKETA</h1>
-                <p>Vardas: <?php print $name; ?></p>
-                <p>Pavarde: <?php print $last_name; ?></p>
-                <p>Amzius: <?php print $years; ?></p>
-                <p>Lygis: <?php print $level; ?></p>
-                <p><?php print $atsakymas; ?></p>
-            </div>
-        </div>
-    <?php else: ?>
-        <form action="" method="post">
-            <input type="text" placeholder="vardas" name="vardas">
-            <input type="text" placeholder="pavarde" name="pavarde">
-            <input type="number" placeholder="amžius" name="metai">
-            <label for="lygis">Kaip vertini savo PHP žinias?</label>
-            <select name="lygis" id="lygis">
-                <option value="nekažką">Nekažką</option>
-                <option value="pradedantysis">Pradedantysis</option>
-                <option value="pažengęs">Pažengęs</option>
-                <option value="gerai varau">Gerai varau</option>
-            </select>
-            <input type="submit" name="pateikti">
-        </form>
-    <?php endif; ?>
+    <form method=post>
+        <input type="submit" name="count" class="button" value="<?php print $counter; ?>"/>
+        <input type="image"
+               src="https://lh3.googleusercontent.com/proxy/sI_EH0NKV-5lgVjSJQ0ZdnFF7upXpFy01mWhOS08y504Lm98N-sVHgZD1e7jMNqgg48JItIELV33KfylOwrTTLI9uGTCvpXFpqa8chPPZ2h4Cbul-0Ixm7LmWOnsz773UQ"
+               width="<?php print $counter *10; ?>" height="<?php print $counter*10; ?>">
+    </form>
+    <?php
+    ?>
 </main>
 </body>
 </html>
