@@ -1,13 +1,28 @@
 <?php
-$counter = 0;
+var_dump($_POST);
+$email = isset($_POST['email']) ? ($_POST['email']) : '';
+$form = [
+    'email' => [
+        'label' => 'Email:',
+        'type' => 'text',
+        'placeholder' => 'Aurimas:'
+    ],
+    'password' => [
+        'label' => 'Password:',
+        'type' => 'password',
+        'placeholder' => 'Your password'
+    ]
+];
 
-
-
-    if (isset($_POST['count'])) {
-    $counter= (int)$_POST['count'] + 1 ;
+function get_clean_input($form) {
+    $parameters = [];
+    foreach ($form as $index => $item) {
+        $parameters[$index] = FILTER_SANITIZE_SPECIAL_CHARS;
     }
+    return filter_input_array(INPUT_POST, $parameters);
+}
 
-
+var_dump( get_clean_input($form));
 ?>
 
 <!doctype html>
@@ -31,14 +46,18 @@ $counter = 0;
 </style>
 <body>
 <main>
+
     <form method=post>
-        <input type="submit" name="count" class="button" value="<?php print $counter; ?>"/>
-        <input type="image"
-               src="https://lh3.googleusercontent.com/proxy/sI_EH0NKV-5lgVjSJQ0ZdnFF7upXpFy01mWhOS08y504Lm98N-sVHgZD1e7jMNqgg48JItIELV33KfylOwrTTLI9uGTCvpXFpqa8chPPZ2h4Cbul-0Ixm7LmWOnsz773UQ"
-               width="<?php print $counter *10; ?>" height="<?php print $counter*10; ?>">
+        <?php foreach ($form as $input_name => $input): ?>
+            <label for="">
+                <?php print $input['label']; ?>
+                <input type="<?php print $input['type']; ?> name="<?php print $input_name; ?> "
+                placeholder="<?php print $input['placeholder']; ?>">
+            </label>
+        <?php endforeach; ?>
+        <button name="button">Log in</button>
     </form>
-    <?php
-    ?>
+
 </main>
 </body>
 </html>
