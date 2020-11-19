@@ -6,8 +6,7 @@
  * @return string HTML atributai.
  */
 
-function html_attr(array $attr): string
-{
+function html_attr(array $attr): string {
     $string = '';
     foreach ($attr as $name => $value) {
         $string .= "$name=\"$value\"";
@@ -16,7 +15,7 @@ function html_attr(array $attr): string
 }
 
 /**
- * Iš duoto duomenų masyvo sukuria atributus
+ * Iš duoto duomenų masyvo sukuria input atributus
  * deklaruojantį tekstą skirtą HTML input elementui.
  *
  * Sumuojami atributai yra name, type, value ir visi likę
@@ -27,8 +26,7 @@ function html_attr(array $attr): string
  * @return string input elemento atributai.
  */
 
-function input_attr(string $field_name, array $field): string
-{
+function input_attr(string $field_name, array $field): string {
     $attributes = [
             'name' => $field_name,
             'type' => $field['type'],
@@ -38,7 +36,7 @@ function input_attr(string $field_name, array $field): string
 }
 
 /**
- * Iš duoto duomenų masyvo sukuria atributus
+ * Iš duoto duomenų masyvo sukuria atributus mygtukams
  * deklaruojantį tekstą HTML button elementui.
  *
  * name atributas visad turi likti 'action'.
@@ -48,8 +46,7 @@ function input_attr(string $field_name, array $field): string
  * @return string input elemento atributai.
  */
 
-function button_attr(string $button_id, array $button): string
-{
+function button_attr(string $button_id, array $button): string {
     $attributes = [
             'name' => 'action',
             'type' => $button['type'],
@@ -58,27 +55,74 @@ function button_attr(string $button_id, array $button): string
     return html_attr($attributes);
 }
 
-//function form_attr($form)
-//{
-//    $defaults = [
-//        'method' => 'POST'
-//    ];
-//    if (isset($form['attr'])) {
-//        return $form['attr'] + $defaults;
-//    }
-//    return $defaults;
-//}
-
 /**
- * funkcija kuri isspausdina formos tago atributus
+ * funkcija kuri isspausdina formos tago atributus.
  *
  * @param $form
  * @return string
  */
 
-function form_attr($form)
-{
+function form_attr($form) {
     return html_attr(($form['attr'] ?? []) + [
             'method' => 'POST'
         ]);
 }
+
+/**
+ * Iš duoto duomenų masyvo sukuria atributus select.
+ * deklaruojantį tekstą HTML button elementui.
+ *
+ * name atributas visad turi likti 'action'.
+ *
+ * @param string $select_id HTML button'o value atributas.
+ * @param array $select masyvas HTML button atributų.
+ * @return string input elemento atributai.
+ */
+
+function select_attr(string $select_id, array $select): string {
+    $attributes = [
+            'name' => $select_id,
+        ] + ($select['extra']['attr'] ?? []);
+    return html_attr($attributes);
+}
+
+/**
+ * Iš duoto duomenų masyvo sukuria atributus option.
+ * deklaruojantį tekstą HTML button elementui.
+ *
+ * name atributas visad turi likti 'action'.
+ *
+ * @param string $select_id HTML button'o value atributas.
+ * @param array $select masyvas HTML button atributų.
+ * @return string input elemento atributai.
+ */
+function option_attr(string $option_id, array $option): string {
+    $attributes = [
+        'value' => $option_id,
+    ];
+    if ($option['value'] == $option_id) {
+        $attributes['selected'] = 'selected';
+    }
+    return html_attr($attributes);
+}
+
+
+/**
+ * Funkcija kuri išspausdina textarea atributus.
+ *
+ * name atributas visad turi likti 'action'.
+ *
+ * @param string $textarea_id HTML button'o value atributas.
+ * @param array $textarea masyvas HTML button atributų.
+ * @return string input elemento atributai.
+ */
+
+function textarea_attr(string $textarea_id, array $textarea): string {
+    $attributes = [
+            'name' => $textarea_id,
+        ] + ($textarea['extra']['attr'] ?? []);
+    return html_attr($attributes);
+}
+
+
+

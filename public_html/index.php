@@ -1,143 +1,15 @@
 <?php
 require '../bootloader.php';
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'name' => [
-            'label' => 'Name:',
-            'type' => 'text',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_field_has_space'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Vardas ir Pavarde',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'age' => [
-            'label' => 'Age:',
-            'type' => 'number',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_age'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Amzius',
-                    'class' => 'input-field'
-                ]
-            ]
-        ]
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Ar as normalus?',
-            'type' => 'submit',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ],
-        'clear' => [
-            'title' => 'Clear',
-            'type' => 'reset',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ]
-    ]
-];
-//$form = [
-//    'attr' => [
-//        'method' => 'POST',
-//    ],
-//    'fields' => [
-//        'name' => [
-//            'label' => 'Vardas ir pavardė:',
-//            'type' => 'text',
-//            'validators' => [
-//                'validate_field_not_empty',
-//                'validate_is_there_are_space',
-//
-//            ],
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Vardas ir pavarde',
-//                    'class' => 'input-field'
-//                ]
-//            ]
-//        ],
-//        'age' => [
-//            'label' => 'Metai:',
-//            'type' => 'text',
-//            'validators' => [
-//                'validate_field_not_empty',
-//                'validate_if_old_enough'
-//            ],
-//            'extra' => [
-//                'attr' => [
-//                    'placeholder' => 'Your age...',
-//                    'class' => 'input-field'
-//                ]
-//            ]
-//        ],
-////        'password' => [
-////            'label' => 'Password:',
-////            'type' => 'password',
-////            'validators' => [
-////                'validate_field_not_empty',
-////            ],
-////            'extra' => [
-////                'attr' => [
-////                    'placeholder' => 'Your password...',
-////                    'class' => 'input-field'
-////                ]
-////            ]
-////        ]
-//    ],
-//    'buttons' => [
-//        'submit' => [
-//            'title' => 'Ar aš normalus',
-//            'type' => 'submit',
-//            'extra' => [
-//                'attr' => [
-//                    'class' => 'btn'
-//                ]
-//            ]
-//        ],
-////        'clear' => [
-////            'title' => 'Clear',
-////            'type' => 'reset',
-////            'extra' => [
-////                'attr' => [
-////                    'class' => 'btn'
-////                ]
-////            ]
-////        ]
-//    ]
-//];
+//Check if user is logged in and show it on the screen
 
-$filtered = get_clean_input($form);
-
-if ($filtered) {
-    $success = validate_form($form, $filtered);
-    if($success) {
-        var_dump('success');
-    } else {
-        var_dump('not');
-    }
+if (is_logged_in()) {
+    $message = 'Welcome to WTF shop ' . $_SESSION['email'];
+} else {
+    header("location: /login.php");
 }
 
+$nav = nav();
 ?>
 <!doctype html>
 <html lang="en">
@@ -146,10 +18,24 @@ if ($filtered) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <title>Forms</title>
 </head>
-
 <body>
-<?php require ROOT . '/core/templates/form.tpl.php' ?>
+<header>
+    <?php require ROOT . '/core/templates/navigation.tpl.php'; ?>
+</header>
+<main>
+    <h1 class="index_tittle"><?php print $message; ?></h1>
+    <article class="products_container">
+        <?php require ROOT . '/core/templates/shop_stuff.tpl.php'; ?>
+    </article>
+</main>
 </body>
 </html>
+
+
+

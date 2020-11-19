@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    background: rgb(238, 174, 174);
+    background: radial-gradient(circle, rgba(238, 174, 174, 1) 0%, rgba(148, 201, 233, 1) 100%);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.index_tittle, .user_name {
+    font-size: 40px;
+    color: white;
+    font-family: 'Pacifico', cursive;
+}
+
+.input_image {
+    width: 250px;
+    height: 250px;
+}
+
+.products_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    align-content: center;
+    justify-items: center;
+    margin: 0 auto;
+}
+
+.product_container {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.product_image {
+    width: 250px;
+    height: 250px;
+}
+.product_name {
+    font-size: 20px;
+    color: cornflowerblue;
+    font-family: 'Pacifico', cursive;
+}
+
+.product_description {
+    color: cornflowerblue;
+}
+
+.product_price {
+    font-size: 30px;
+    color: cornflowerblue;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    list-style: none;
+    margin: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Pacifico', cursive;
+    font-size: 25px;
+}
+
+a:hover {
+    color: cornflowerblue;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+
+label {
+    font-family: 'Pacifico', cursive;
+    color: cornflowerblue;
+}
+
+input, textarea {
+    outline: none;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+}
+
+button {
+    font-family: 'Pacifico', cursive;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+    padding: 5px;
+}
+
+button:hover {
+   transform: scale(1.1);
+}
+
+.log_in_tittle, .register_tittle {
+    font-family: 'Pacifico', cursive;
+    color: white;
+    margin: 10px;
+    font-size: 35px;
+}
