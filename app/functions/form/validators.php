@@ -6,34 +6,38 @@
  * @param array $field
  * @return bool
  */
-function validate_user_unique(string $field_value, array &$field): bool {
-    $db_data = file_to_array(DB_FILE);
-    var_dump($db_data);
-    var_dump($field);
-    foreach ($db_data as $entry) {
-        if ($field_value === $entry['email']) {
-            $field['error'] = 'Email is already taken. Enter new email.';
-            return false;
-        }
-    }
+function validate_user_unique(string $field_value, array &$field): bool
+{
+    $fileDB = new FileDB(DB_FILE);
+    $fileDB->load();
+    if ($fileDB->getRowWhere('users',['email' => $field_value])) {
+        $field['error'] = 'User jau egzistuoja';
+
+        return false;
+    };
+
     return true;
 }
+
 /**
- * Tikrina ar loginas ir slaptažodis atitka jau priregistruotus
+ * Tikrina ar loginas ir slaptažodis atitinka jau priregistruotus
  *
- * @param $field_value
+ * @param array $field_value
  * @param array $field
  * @return bool
  */
-function validate_login( $field_value,  &$field): bool {
-    $data = file_to_array(DB_FILE);
+function validate_login(array $field_value, &$field): bool
+{
+    $fileDB = new FileDB(DB_FILE);
+    $fileDB->load();
+    if ($fileDB->getRowWhere('users',[
+        'email' => $field_value['email'],
+        'password' => $field_value['password']
+    ] )) {
+        return true;
+    };
 
-    foreach ($data as $entry) {
-        if ($entry['email'] === $field_value['email']
-            && $entry['password'] === $field_value['password'] ) {
-            return true;
-        }
-    }
     $field['error'] = 'Email arba slaptažodis neveikia';
-    return  false;
+
+    return false;
 }

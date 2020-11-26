@@ -25,6 +25,9 @@
             <?php print $button['title']; ?>
         </button>
     <?php endforeach; ?>
+    <?php if (isset($form['error'])): ?>
+        <p class="error"><?php print $form['error']; ?></p>
+    <?php endif; ?>
 </form>
 
 

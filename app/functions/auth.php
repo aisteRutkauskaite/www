@@ -6,15 +6,14 @@
  */
 function is_logged_in() {
     if ($_SESSION) {
-            $db_data = file_to_array(DB_FILE);
-            foreach ($db_data as $user) {
-                if (($user['email'] === $_SESSION['email'])
-                    && ($user['password'] === $_SESSION['password'])) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        $fileDB = new FileDB(DB_FILE);
+        $fileDB->load();
+        return (bool) $fileDB->getRowWhere('users', [
+            'email' => $_SESSION['email'],
+            'password' => $_SESSION['password']
+        ]);
+    }
+    return false;
 }
 
 /**
@@ -23,7 +22,8 @@ function is_logged_in() {
  * @param null $redirect
  */
 
-function logout($redirected = null) {
+function logout($redirected = null)
+{
     $_SESSION = [];
     session_destroy();
     if ($redirected) {

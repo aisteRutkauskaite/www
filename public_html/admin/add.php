@@ -92,9 +92,14 @@ $filtered = get_clean_input($form);
 if ($filtered) {
     $success = validate_form($form, (array)$filtered);
     if ($success) {
-        $shop_stuff = file_to_array(ROOT . '/app/data/db_shop.json');
-        $shop_stuff[] = $filtered;
-        array_to_file($shop_stuff, ROOT . '/app/data/db_shop.json');
+//        $shop_stuff = file_to_array(ROOT . '/app/data/db_shop.json');
+//        $shop_stuff[] = $filtered;
+//        array_to_file($shop_stuff, ROOT . '/app/data/db_shop.json');
+        $fileDB = new FileDB(DB_FILE);
+        $fileDB->load();
+        $fileDB->createTable('items');
+        $fileDB->insertRow('items', $filtered);
+        $fileDB->save();
     } else {
         header("location: /login.php");
     }
@@ -107,7 +112,7 @@ if ($filtered) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../media/style.css">
     <title>ADD</title>
 </head>
 <body>

@@ -80,13 +80,18 @@ if ($filtered) {
     $success = validate_form($form, $filtered);
     if ($success) {
         unset($filtered['password_repeat']);
-        $file = file_to_array(ROOT . '/app/data/db.json');
-        $file[] = $filtered;
-        array_to_file($file, ROOT . '/app/data/db.json');
-        $p = 'Sveikinu uzsireginus';
+//        $file = file_to_array(ROOT . '/app/data/db.json');
+//        $file[] = $filtered;
+//
+//        $input_from_json=$fileDB->getData();
+//        $input_from_json['users'][] = $filtered;
+//        $fileDB->setData($input_from_json);
+        $fileDB = new FileDB(DB_FILE);
+        $fileDB->load();
+        $fileDB->createTable('users');
+        $fileDB->insertRow('users', $filtered);
+        $fileDB->save();
         header("location: /login.php");
-    } else {
-        $p = 'Eik nx';
     }
 }
 
@@ -100,7 +105,7 @@ $nav = nav();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media/style.css">
     <title>Forms</title>
 </head>
 <body>
@@ -110,9 +115,6 @@ $nav = nav();
 <main>
     <h1 class="register_tittle">Reginkis</h1>
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-    <?php if (isset ($p)): ?>
-        <p><?php print $p; ?></p>
-    <?php endif; ?>
 </main>
 </body>
 </html>

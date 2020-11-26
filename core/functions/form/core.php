@@ -4,7 +4,6 @@
  * Filtruojami pateikti inputai ir tikrinami ar nėra netinkamų simbolių.
  *
  * @param array $form Formos masyvas.
- * @return bool
  */
 function get_clean_input($form) {
     $filter_params = [];

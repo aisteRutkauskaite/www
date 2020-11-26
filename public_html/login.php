@@ -69,9 +69,8 @@ if ($filtered) {
         $_SESSION['password'] = $filtered['password'];
         $p = 'Sveikinu prisiloginus';
         header("Location:/admin/add.php");
-    } else {
-        $p = 'Eik regintis';
     }
+
 }
 
 $nav = nav();
@@ -84,13 +83,15 @@ $nav = nav();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media/style.css">
     <title>Forms</title>
 </head>
 <body>
 <main>
     <header>
+
         <?php require ROOT . '/core/templates/navigation.tpl.php'; ?>
+
     </header>
     <h1 class="log_in_tittle">Loginkis</h1>
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
