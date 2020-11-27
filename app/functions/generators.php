@@ -9,6 +9,7 @@ function nav() {
     if (is_logged_in()) {
         return $nav + [
                 'Add' => '/admin/add.php',
+                'My page' => '/admin/my.php',
                 'Logout' => '/logout.php',
             ];
     } else {

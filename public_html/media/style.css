@@ -127,3 +127,30 @@ button:hover {
     margin: 10px;
     font-size: 35px;
 }
+
+.poop_wall {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    position: relative;
+}
+
+.poop {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.red{
+    background-color: orangered;
+}
+
+.green {
+    background-color: darkgreen;
+}
+
+.blue{
+    background-color: cornflowerblue;
+}
